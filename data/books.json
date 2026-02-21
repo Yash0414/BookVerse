@@ -2,21 +2,21 @@
     "books": [
         {
             "id": 1,
-            "title": "A Brief History of Time",
+            "title": "Atomic Habit",
             "author": "Stephen Hawking",
             "category": "Science",
             "description": "Explores the mysteries of the universe, from the Big Bang to black holes.",
-            "pdfUrl": "https://www.google.com/search?q=A+Brief+History+of+Time+PDF",
-            "cover": "https://images.unsplash.com/photo-1543004403-ec54199c277f?auto=format&fit=crop&q=80&w=400"
+            "pdfUrl": "assets/pdfs/Atomic-habits ( PDFDrive ).pdf",
+            "cover": "assets/images/atomic-habit.webp"
         },
         {
             "id": 2,
-            "title": "The Selfish Gene",
+            "title": "The-Alchemist",
             "author": "Richard Dawkins",
             "category": "Science",
             "description": "Revolutionary perspective on evolution through the lens of genes.",
-            "pdfUrl": "https://www.google.com/search?q=The+Selfish+Gene+PDF",
-            "cover": "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=400"
+            "pdfUrl": "assets/pdfs/The-Power-Of-Now-Eckhart Tolle.pdf",
+            "cover": "assets/images/The-Alchemist-cover.jpg"
         },
         {
             "id": 3,
