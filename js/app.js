@@ -1,4 +1,4 @@
-// Bookverse App logic
+// Bookverse App logic - Professionally Enhanced
 
 document.addEventListener('DOMContentLoaded', () => {
     // State management
@@ -22,12 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const readerView = document.getElementById('reader-view');
     const closeReader = document.getElementById('close-reader');
-    const readerText = document.getElementById('reader-text');
+    const pdfFrame = document.getElementById('pdf-frame');
+    const downloadBook = document.getElementById('download-book');
     const readerBookTitle = document.getElementById('reader-book-title');
-    const increaseFont = document.getElementById('increase-font');
-    const decreaseFont = document.getElementById('decrease-font');
     const readerThemeToggle = document.getElementById('reader-theme-toggle');
     const bookmarkBtn = document.getElementById('bookmark-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
 
     // Initialize
     init();
@@ -39,31 +40,21 @@ document.addEventListener('DOMContentLoaded', () => {
         checkPreferredTheme();
     }
 
-    // Load books from JSON + LocalStorage
     async function loadBooks() {
         try {
             const response = await fetch('data/books.json');
             const data = await response.json();
-            
-            // Get books from localStorage added via Admin Panel
             const localBooks = JSON.parse(localStorage.getItem('bookverse_custom_books')) || [];
-            
             state.books = [...data.books, ...localBooks];
         } catch (error) {
             console.error('Error loading books:', error);
-            // Fallback to empty if error
             state.books = JSON.parse(localStorage.getItem('bookverse_custom_books')) || [];
         }
     }
 
-    // Render Books Grid
     function renderBooks(category = 'All') {
         booksDisplay.innerHTML = '';
-        
-        let filteredBooks = state.books;
-        if (category !== 'All') {
-            filteredBooks = state.books.filter(book => book.category === category);
-        }
+        let filteredBooks = category === 'All' ? state.books : state.books.filter(book => book.category === category);
 
         if (filteredBooks.length === 0) {
             booksDisplay.innerHTML = '<p class="no-results">No books found in this category.</p>';
@@ -80,13 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const div = document.createElement('div');
         div.className = 'book-card animate-up';
         div.innerHTML = `
-            <img src="${book.cover}" alt="${book.title}" class="book-cover">
+            <div class="book-cover-container">
+                <img src="${book.cover}" alt="${book.title}" class="book-cover">
+                <div class="card-overlay"></div>
+            </div>
             <div class="book-info">
                 <span class="category-tag">${book.category}</span>
                 <h3>${book.title}</h3>
                 <span class="author">By ${book.author}</span>
                 <p>${book.description}</p>
-                <button class="btn btn-read" data-id="${book.id}">Read Now</button>
+                <button class="btn btn-primary btn-read" data-id="${book.id}">Read Now</button>
             </div>
         `;
 
@@ -94,28 +88,29 @@ document.addEventListener('DOMContentLoaded', () => {
         return div;
     }
 
-    // Reader logic
     function openReader(book) {
         state.currentReadingBook = book;
         readerBookTitle.textContent = book.title;
-        readerText.textContent = book.content;
-        readerText.style.fontSize = `${state.readerFontSize}px`;
+
+        // Handle PDF source
+        // If it's a real PDF URL, we use it. If it's a placeholder search URL, we inform the user or just show it.
+        pdfFrame.src = book.pdfUrl || '';
+        downloadBook.href = book.pdfUrl || '#';
+
         readerView.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent scroll
-        
-        // Update bookmark icon
+        document.body.style.overflow = 'hidden';
         updateBookmarkIcon(book.id);
     }
 
     function closeReaderView() {
         readerView.classList.add('hidden');
+        pdfFrame.src = ''; // Stop any current loading
         document.body.style.overflow = 'auto';
     }
 
-    // Search logic
     function toggleSearch() {
-        searchOverlay.style.display = searchOverlay.style.display === 'block' ? 'none' : 'block';
-        if (searchOverlay.style.display === 'block') {
+        searchOverlay.style.display = searchOverlay.style.display === 'flex' ? 'none' : 'flex';
+        if (searchOverlay.style.display === 'flex') {
             searchInput.focus();
         }
     }
@@ -127,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const results = state.books.filter(book => 
-            book.title.toLowerCase().includes(query) || 
-            book.author.toLowerCase().includes(query) || 
+        const results = state.books.filter(book =>
+            book.title.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query) ||
             book.category.toLowerCase().includes(query)
         );
 
@@ -140,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Theme logic
     function toggleTheme() {
         state.isDarkMode = !state.isDarkMode;
         applyTheme();
@@ -166,47 +160,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Bookmark logic
-    function toggleBookmark() {
-        if (!state.currentReadingBook) return;
-        
-        const bookId = state.currentReadingBook.id;
-        const index = state.bookmarks.indexOf(bookId);
-        
-        if (index === -1) {
-            state.bookmarks.push(bookId);
-        } else {
-            state.bookmarks.splice(index, 1);
-        }
-        
-        localStorage.setItem('bookverse_bookmarks', JSON.stringify(state.bookmarks));
-        updateBookmarkIcon(bookId);
-    }
-
     function updateBookmarkIcon(bookId) {
-        if (state.bookmarks.includes(bookId)) {
-            bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
-            bookmarkBtn.classList.add('active');
-        } else {
-            bookmarkBtn.innerHTML = '<i class="far fa-bookmark"></i>';
-            bookmarkBtn.classList.remove('active');
-        }
+        const isBookmarked = state.bookmarks.includes(bookId);
+        bookmarkBtn.innerHTML = isBookmarked ? '<i class="fas fa-bookmark"></i>' : '<i class="far fa-bookmark"></i>';
+        bookmarkBtn.classList.toggle('active', isBookmarked);
     }
 
-    // Event Listeners
     function setupEventListeners() {
-        // Category switching
         catTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 catTabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 renderBooks(tab.dataset.category);
+
+                // On mobile, if choosing a category, close the menu if open
+                if (window.innerWidth < 768) {
+                    navLinks.classList.remove('mobile-active');
+                }
             });
         });
 
-        // Moble menu (Simple)
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
         if (mobileMenu) {
             mobileMenu.addEventListener('click', () => {
                 navLinks.classList.toggle('mobile-active');
@@ -214,33 +187,30 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Search
         searchBtn.addEventListener('click', toggleSearch);
         closeSearch.addEventListener('click', toggleSearch);
         searchInput.addEventListener('input', handleSearch);
-
-        // Theme
         themeToggle.addEventListener('click', toggleTheme);
         readerThemeToggle.addEventListener('click', toggleTheme);
-
-        // Reader Controls
         closeReader.addEventListener('click', closeReaderView);
-        increaseFont.addEventListener('click', () => {
-            state.readerFontSize += 2;
-            readerText.style.fontSize = `${state.readerFontSize}px`;
-        });
-        decreaseFont.addEventListener('click', () => {
-            if (state.readerFontSize > 12) {
-                state.readerFontSize -= 2;
-                readerText.style.fontSize = `${state.readerFontSize}px`;
-            }
-        });
-        bookmarkBtn.addEventListener('click', toggleBookmark);
 
-        // Close search on Escape
+        bookmarkBtn.addEventListener('click', () => {
+            if (!state.currentReadingBook) return;
+            const bookId = state.currentReadingBook.id;
+            const index = state.bookmarks.indexOf(bookId);
+            if (index === -1) {
+                state.bookmarks.push(bookId);
+            } else {
+                state.bookmarks.splice(index, 1);
+            }
+            localStorage.setItem('bookverse_bookmarks', JSON.stringify(state.bookmarks));
+            updateBookmarkIcon(bookId);
+        });
+
+        // Close modal on Escape
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                if (searchOverlay.style.display === 'block') toggleSearch();
+                if (searchOverlay.style.display === 'flex') toggleSearch();
                 if (!readerView.classList.contains('hidden')) closeReaderView();
             }
         });

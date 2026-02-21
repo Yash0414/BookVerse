@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             author: document.getElementById('author').value,
             category: document.getElementById('category').value,
             cover: document.getElementById('cover').value,
+            pdfUrl: document.getElementById('pdfUrl').value,
             description: document.getElementById('description').value,
             content: document.getElementById('content').value
         };

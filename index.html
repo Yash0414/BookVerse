@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookverse | Student Digital Library</title>
-    <meta name="description" content="Access a world of knowledge with Bookverse, the modern digital library for students. Read, learn, and grow.">
+    <meta name="description"
+        content="Access a world of knowledge with Bookverse, the modern digital library for students. Read, learn, and grow.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body class="light-mode">
     <!-- Header/Navigation -->
     <header class="navbar">
@@ -51,7 +56,8 @@
                 <div class="hero-content">
                     <h1 class="animate-up">Student Learning Library</h1>
                     <p class="tagline animate-up">Read. Learn. Grow.</p>
-                    <p class="description animate-up">Access thousands of books across science, technology, and literature. Your journey to excellence starts here.</p>
+                    <p class="description animate-up">Access thousands of books across science, technology, and
+                        literature. Your journey to excellence starts here.</p>
                     <div class="hero-btns animate-up">
                         <a href="#categories" class="btn btn-primary">Explore Books</a>
                         <a href="#about" class="btn btn-secondary">Learn More</a>
@@ -79,7 +85,7 @@
                     <h2>Explore Categories</h2>
                     <p>Find your next great read by browsing our curated collections.</p>
                 </div>
-                
+
                 <div class="category-tabs">
                     <button class="cat-tab active" data-category="All">All</button>
                     <button class="cat-tab" data-category="Science">Science</button>
@@ -95,22 +101,21 @@
             </div>
         </section>
 
-        <!-- Reading View (Modal / Dynamic) -->
+        <!-- PDF Reading View -->
         <div id="reader-view" class="reader-view hidden">
+            <div class="reader-header">
+                <button id="close-reader" class="back-btn"><i class="fas fa-arrow-left"></i> Exit Reader</button>
+                <h2 id="reader-book-title">Reading Mode</h2>
+                <div class="reader-controls">
+                    <a id="download-book" href="#" target="_blank" class="ctrl-btn" title="Download PDF"><i
+                            class="fas fa-download"></i></a>
+                    <button id="reader-theme-toggle" class="ctrl-btn" title="Toggle Theme"><i
+                            class="fas fa-adjust"></i></button>
+                    <button id="bookmark-btn" class="ctrl-btn" title="Bookmark"><i class="far fa-bookmark"></i></button>
+                </div>
+            </div>
             <div class="reader-container">
-                <div class="reader-header">
-                    <button id="close-reader" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Library</button>
-                    <h2 id="reader-book-title">Book Title</h2>
-                    <div class="reader-controls">
-                        <button id="decrease-font" class="ctrl-btn">A-</button>
-                        <button id="increase-font" class="ctrl-btn">A+</button>
-                        <button id="reader-theme-toggle" class="ctrl-btn"><i class="fas fa-adjust"></i></button>
-                        <button id="bookmark-btn" class="ctrl-btn"><i class="far fa-bookmark"></i></button>
-                    </div>
-                </div>
-                <div class="reader-content" id="reader-text">
-                    <!-- Book content goes here -->
-                </div>
+                <iframe id="pdf-frame" src="" type="application/pdf"></iframe>
             </div>
         </div>
     </main>
@@ -121,7 +126,8 @@
             <div class="footer-grid">
                 <div class="footer-info">
                     <div class="logo">Bookverse<span>.</span></div>
-                    <p>Empowering students through digital access to knowledge and literature. Your hub for learning.</p>
+                    <p>Empowering students through digital access to knowledge and literature. Your hub for learning.
+                    </p>
                 </div>
                 <div class="footer-links">
                     <h3>Quick Links</h3>
@@ -157,4 +163,5 @@
     <!-- JavaScript -->
     <script src="js/app.js"></script>
 </body>
+
 </html>
