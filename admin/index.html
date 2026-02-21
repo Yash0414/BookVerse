@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Bookverse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .admin-container {
+            max-width: 800px;
+            margin: 120px auto 50px;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-light);
+            color: var(--text-main);
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .book-list {
+            margin-top: 3rem;
+        }
+
+        .book-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .book-item-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .delete-btn {
+            color: var(--secondary);
+            cursor: pointer;
+        }
+
+        .back-home {
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="admin-container">
+            <a href="../index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Library</a>
+            <div class="admin-header">
+                <h1>Admin Panel</h1>
+                <p>Upload new books to the digital library</p>
+            </div>
+
+            <form id="add-book-form">
+                <div class="form-group">
+                    <label for="title">Book Title</label>
+                    <input type="text" id="title" required placeholder="e.g. The Future of AI">
+                </div>
+                <div class="form-group">
+                    <label for="author">Author Name</label>
+                    <input type="text" id="author" required placeholder="e.g. John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" required>
+                        <option value="Science">Science</option>
+                        <option value="Technology">Technology</option>
+                        <option value="History">History</option>
+                        <option value="Literature">Literature</option>
+                        <option value="Self Development">Self Development</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cover">Cover Image URL</label>
+                    <input type="url" id="cover" required placeholder="https://images.unsplash.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="description">Short Description (2-3 lines)</label>
+                    <textarea id="description" rows="3" required
+                        placeholder="A brief overview of the book..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="content">Full Content</label>
+                    <textarea id="content" rows="10" required placeholder="Paste the book content here..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Add Book to Library</button>
+            </form>
+
+            <div class="book-list">
+                <h3>Recently Added Books</h3>
+                <div id="added-books-container">
+                    <!-- Added books will appear here -->
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <button id="download-json" class="btn btn-secondary">Download Updated JSON Data</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>
