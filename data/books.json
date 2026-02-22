@@ -3,29 +3,29 @@
         {
             "id": 1,
             "title": "Atomic Habit",
-            "author": "Stephen Hawking",
-            "category": "Science",
-            "description": "Explores the mysteries of the universe, from the Big Bang to black holes.",
+            "author": "James Clear",
+            "category": "Personal Development",
+            "description": "Focuses on building good habits and breaking bad ones using small, consistent improvements. Explains how tiny changes compound into remarkable results over time.",
             "pdfUrl": "assets/pdfs/Atomic-habits ( PDFDrive ).pdf",
             "cover": "assets/images/atomic-habit.webp"
         },
         {
             "id": 2,
             "title": "The-Alchemist",
-            "author": "Richard Dawkins",
-            "category": "Science",
-            "description": "Revolutionary perspective on evolution through the lens of genes.",
+            "author": "Paulo Coelho",
+            "category": "Philosophical",
+            "description": "A symbolic story about a shepherd named Santiago pursuing his dreams. Emphasizes following one’s “Personal Legend” and listening to the heart.",
             "pdfUrl": "assets/pdfs/The-Power-Of-Now-Eckhart Tolle.pdf",
             "cover": "assets/images/The-Alchemist-cover.jpg"
         },
         {
             "id": 3,
-            "title": "Cosmos",
-            "author": "Carl Sagan",
-            "category": "Science",
-            "description": "The story of fifteen billion years of cosmic evolution.",
-            "pdfUrl": "https://www.google.com/search?q=Cosmos+Sagan+PDF",
-            "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400"
+            "title": "Think and Grow Rich",
+            "author": "Napoleon Hill",
+            "category": "Self-help",
+            "description": "Based on principles of success gathered from wealthy individuals. Highlights mindset",
+            "pdfUrl": "assets/pdfs/Think-And-Grow-Rich_2011-06.pdf",
+            "cover": "assets/images/think-and-grow.jpg"
         },
         {
             "id": 4,
@@ -38,21 +38,21 @@
         },
         {
             "id": 5,
-            "title": "Clean Code",
-            "author": "Robert C. Martin",
-            "category": "Technology",
-            "description": "A handbook of agile software craftsmanship.",
-            "pdfUrl": "https://www.google.com/search?q=Clean+Code+PDF",
-            "cover": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=400"
+            "title": "You Can Win",
+            "author": "Shiv Khera",
+            "category": "Motivational",
+            "description": "Practical guide to building positive attitude, character, and leadership skills. Focuses on ethics, confidence, and goal-setting.",
+            "pdfUrl": "assets/pdfs/you-can-win-by-shiv-khera.pdf",
+            "cover": "assets/images/you-can-win.jpg"
         },
         {
             "id": 11,
-            "title": "Sapiens",
-            "author": "Yuval Noah Harari",
-            "category": "History",
-            "description": "A brief history of humankind from the Stone Age to the present.",
-            "pdfUrl": "https://www.google.com/search?q=Sapiens+Harari+PDF",
-            "cover": "https://images.unsplash.com/photo-1544411047-c491574abb3a?auto=format&fit=crop&q=80&w=400"
+            "title": "Zero to One",
+            "author": "Peter Thiel",
+            "category": "Business",
+            "description": "Discusses how to create innovative startups that build something truly new (“0 to 1”). Emphasizes monopoly thinking and unique value creation.",
+            "pdfUrl": "assets/pdfs/Zero-to-One.pdf",
+            "cover": "assets/images/zero-to-one.jpg"
         }
     ]
 }
